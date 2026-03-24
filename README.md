@@ -61,6 +61,12 @@ python3 -m pip install -e .
 tinyfish --help
 ```
 
+Once the package is published to PyPI, installation becomes:
+
+```bash
+python3 -m pip install tinyfish-cli
+```
+
 ## Authentication
 
 The CLI resolves the API key in this order:
@@ -442,7 +448,7 @@ Run selected tasks only:
   --pretty
 ```
 
-Detailed fanout docs live in [docs/FANOUT.md](docs/FANOUT.md).
+Detailed fanout docs live in [docs/FANOUT.md](https://github.com/lmarte17/tf-cli/blob/main/docs/FANOUT.md).
 
 ### `suite`
 
@@ -845,6 +851,34 @@ python3 bin/tinyfish suite run --help
 python3 bin/tinyfish fanout schema input
 ```
 
+## Publishing To PyPI
+
+As of March 24, 2026, the package name `tinyfish-cli` was available on PyPI.
+
+Build distributions:
+
+```bash
+python3 -m venv .venv-publish
+source .venv-publish/bin/activate
+python3 -m pip install --upgrade pip build twine
+python3 -m build
+python3 -m twine check dist/*
+```
+
+Upload to PyPI:
+
+```bash
+python3 -m twine upload dist/*
+```
+
+Upload to TestPyPI first if you want a dry run:
+
+```bash
+python3 -m twine upload --repository testpypi dist/*
+```
+
+You will need a PyPI account and either an API token or Trusted Publishing configured for the repository.
+
 ## Project Layout
 
 ```text
@@ -856,6 +890,8 @@ src/tinyfish_cli/suite_runner.py suite loading and execution
 src/tinyfish_cli/builtin_suites.py built-in live smoke suites
 docs/FANOUT.md                  detailed fanout documentation
 examples/fanout-template.json   starter fanout plan
+LICENSE                        package license
+MANIFEST.in                    source distribution include rules
 tests/                          unit tests
 ```
 
