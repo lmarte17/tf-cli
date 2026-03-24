@@ -1,0 +1,32 @@
+{
+  "name": "multi-site-checks",
+  "description": "Generic TinyFish fanout template",
+  "request_defaults": {
+    "browser_profile": "lite",
+    "api_integration": "openclaw"
+  },
+  "tasks": [
+    {
+      "id": "task-1",
+      "meta": {
+        "site": "site-a",
+        "kind": "lookup"
+      },
+      "request": {
+        "url": "https://example.com/a",
+        "goal": "Return JSON only with {\"title\":\"...\",\"price\":\"...\"}"
+      }
+    },
+    {
+      "id": "task-2",
+      "meta": {
+        "site": "site-b",
+        "kind": "lookup"
+      },
+      "request": {
+        "url": "https://example.com/b",
+        "goal": "Return JSON only with {\"title\":\"...\",\"price\":\"...\"}"
+      }
+    }
+  ]
+}
